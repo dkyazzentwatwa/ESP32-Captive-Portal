@@ -1,73 +1,141 @@
-<link rel="icon" type="image/x-icon" href="favicon.png">
-<p align="center" width="100%">
-    <img width="60%" align="center" src="https://oceanofanythingofficial.github.io/NodeMCU-Captive-Portal/src/Thumbnail.png"/>
-	<br>
-    <div align="center">
-      <img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/OCEANOFANYTHINGOFFICIAL/NodeMCU-Captive-Portal?style=flat">
-  <img alt="GitHub Repo Version" src="https://img.shields.io/badge/Version-1.0.0.0-brightgreen?style=flat">
-  <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/OCEANOFANYTHINGOFFICIAL/NodeMCU-Captive-Portal?style=social&logoColor=green&color=green">
-  <a target="_blank" href="LICENSE" title="License: MIT"><img src="https://img.shields.io/badge/License-MIT-blue.svg"></a>
-  <a href="https://www.linux.org/" title="Go to Linux homepage"><img src="https://img.shields.io/badge/OS-Linux-blue?logo=linux&logoColor=white" alt="OS - Linux"></a>
-  <a href="https://www.apple.com/macos/" title="Go to Apple homepage"><img src="https://img.shields.io/badge/OS-macOS-blue?logo=apple&logoColor=white" alt="OS - macOS"></a>
-  <a href="https://www.microsoft.com/" title="Go to Microsoft homepage"><img src="https://img.shields.io/badge/OS-Windows-blue?logo=windows&logoColor=white" alt="OS - Windows"></a>
-	<a href="https://oceanofanythingofficial.github.io/NodeMCU-Captive-Portal" title="Go to GitHub Pages homepage"><img src="https://img.shields.io/badge/Hosted_with-GitHub_Pages-blue?logo=github&logoColor=white" alt="Hosted with GH Pages"></a>
-	<img  src="https://img.shields.io/badge/maintained-yes-blue"  alt="maintained - yes">
-	<div><a href="https://oceanofanythingofficial.github.io/NodeMCU-Captive-Portal/" title="Go to project documentation"><img src="https://img.shields.io/badge/view-Documentation-blue?style=for-the-badge" alt="view - Documentation"></a></div>
-   </div>
-</p>
+# Cypher-Portal
 
-## Disclaimer
-This project is for testing and educational purposes. Use it only against your own networks and devices. I don't take any responsibility for what you do with this program.
+**Educational Research Captive Portal System for ESP32**
 
-## About this project
-WiFi captive portal for the ~~NodeMCU (esp8266 Module)~~ ESP32 with DNS spoofing.
+> For authorized security testing and educational research only. Use only on networks you own or have explicit permission to test.
 
-This project can steal any Wi-Fi passwords in simple way. It uses a fake update page to get the password from the user. You just need to edit the Wi-Fi SSID name and the password will be posted to the ESP32.
+*By [Littlehakr](https://github.com/littlehakr)*
 
-The built-in LED will blink 5 times when a password is posted.
+---
 
-<b>Warning!</b> Your saved passwords will **not** disappear when you restart/power off the ESP32.
+## Overview
 
-<b>Note:</b> If you want to see the stored passwords go to "**192.168.4.1**<a>/pass</a>". For changing the SSID, go to "**192.168.4.1**<a>/ssid</a>"
+Cypher-Portal is an enhanced captive portal system for ESP32 with:
+- **10 Business-Themed Templates** — Hotel, Coffee Shop, Corporate, Airport, Library, Conference, Retail, Device Setup, University, Medical
+- **SSD1306 OLED Display** — Menu navigation and status display
+- **3-Button Control** — Left/Center/Right for template selection
+- **DNS + Web Server** — Captive portal detection bypass
+- **Data Capture** — Circular buffer storing last 50 submissions
+- **Serial Control** — Full AT command interface
 
+---
 
+## Quick Start
 
-# Screenshots
+### Hardware
+- ESP32 Dev Module
+- SSD1306 128x64 OLED (I2C: SDA=5, SCL=4)
+- 3 Tactile buttons (GPIO 34, 36, 39)
 
-## ``192.168.4.1/index``
-This is the main page. Here the user will write his password and send it.
+### Flash
+```bash
+arduino-cli compile --fqbn esp32:esp32:esp32 .
+arduino-cli upload --fqbn esp32:esp32:esp32 -p /dev/ttyUSB0 .
+```
 
-<img width="200px" src="src/1_Index_2.png" title="index">
+### Connect
+1. Power on ESP32
+2. Connect to the broadcast SSID (e.g., "GrandHotel_FreeWiFi")
+3. Browser auto-redirects to captive portal
+4. Fill form → data captured on ESP32
 
-## ``192.168.4.1/post``
-This is the post page. The user will be redirected here after posting the password.
+---
 
-<img width="200px" src="src/2_Post.png" title="post">
+## Button Controls
 
-## ``192.168.4.1/pass``
-This is where the attacker can retrieve all the passwords that has been posted.
+| Button | Action |
+|--------|--------|
+| **Left/Right** | Navigate menu / scroll templates |
+| **Center** | Select / Start portal |
+| **Hold Any** | Reset ESP32 |
 
-<img width="200px" src="src/3_Pass.png" title="pass">
+---
 
-## ``192.168.4.1/ssid``
-Here the attacker can change the SSID name of the Access Point on the go.
+## Template Selection
 
-<img width="200px" src="src/4_ssid.png" title="ssid">
+Navigate to `Start Portal` → Use L/R to scroll through 10 templates → C to launch
 
+| # | Template | SSID | Research Use |
+|---|----------|------|--------------|
+| 1 | Hotel/Guest | GrandHotel_FreeWiFi | Hospitality compliance |
+| 2 | Coffee Shop | BeanAndBrew_WiFi | Email opt-in patterns |
+| 3 | Corporate | ACME_Corp_Secure | Authority exploitation |
+| 4 | Airport | SkyLink_Airport | Travel urgency bias |
+| 5 | Library | CityLibrary_Free | Institutional trust |
+| 6 | Conference | TechSummit2024 | Event/social pressure |
+| 7 | Retail | TechZone_WiFi | Lead capture research |
+| 8 | Device Setup | SmartHome_Setup | IoT provisioning attack |
+| 9 | University | MetroU_Campus | Educational compliance |
+| 10 | Medical | Wellness_Medical | Healthcare trust patterns |
 
-# Installation (Arduino IDE)
+---
 
-1. Open your <a href="https://www.arduino.cc/en/main/software">Arduino IDE</a> and go to "File -> Preferences -> Boards Manager URLs" and paste the following link:
-``https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json``
+## Serial Commands
 
+Connect at 115200 baud:
 
-2. Go to "Tools -> Board" and select your board
+```
+AT+PORTAL=START         # Start portal with current template
+AT+PORTAL=STOP          # Stop portal
+AT+PORTAL=STATUS        # Show current status
+AT+PORTAL=LIST          # List all templates
+AT+PORTAL=TEMPLATE=<name>   # Set active template
+AT+PORTAL=CAPTURES      # View captured data
+AT+PORTAL=CLEAR         # Clear capture buffer
+AT+PORTAL=HELP          # Show help
+```
 
-3. Download and open the sketch this sketch.
+---
 
-4. You can optionally change some parameters like the SSID name and texts of the page like title, subtitle, text body etc.
+## Web Interface
 
-5. Upload the code into your board.
+| URL | Description |
+|-----|-------------|
+| `/` | Captive portal page (auto-served) |
+| `/captures` | View all captured submissions |
+| `/clear` | Clear capture buffer |
+| `/success` | Shown after form submission |
 
-6. You are done!
+---
 
+## Captured Data
+
+- LED blinks 3x on each capture
+- Circular buffer: 50 entries max
+- View via `/captures` page or `AT+PORTAL=CAPTURES`
+- Format: `Template: field1=value1 field2=value2 ...`
+
+---
+
+## Educational Research Notes
+
+This tool demonstrates captive portal behavior and user response patterns:
+
+- **Authority** — Corporate/medical templates leverage trust
+- **Urgency** — Airport/event portals exploit time pressure  
+- **Familiarity** — Hotel/library use recognizable contexts
+- **Incentive** — Coffee/retail offer rewards for data
+- **Provisioning** — Device setup mimics real IoT onboarding
+
+### Ethical Use
+- Only test networks you own or have written permission for
+- Do not capture credentials for unauthorized access
+- Document research findings responsibly
+- Consider impact on users who submit data
+
+---
+
+## Libraries Required
+
+```
+Adafruit GFX Library
+Adafruit SSD1306
+```
+
+Install via Arduino IDE: `Sketch → Include Library → Manage Libraries`
+
+---
+
+## License
+
+MIT License — Educational and research purposes only.
