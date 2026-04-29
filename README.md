@@ -4,7 +4,7 @@
 
 > For authorized security testing and educational research only. Use only on networks you own or have explicit permission to test.
 
-*By [Littlehakr](https://github.com/littlehakr)*
+*By [Littlehakr](https://github.com/dkyazzentwatwa)*
 
 ---
 
